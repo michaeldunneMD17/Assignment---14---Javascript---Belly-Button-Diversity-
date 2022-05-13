@@ -1,4 +1,4 @@
-/ Call updatePlotly2 and updateDemoInfo functions to change the bar chart, bubble chart, demographic info, and gauge chart upon selection of id in dropdown menu
+// Call updatePlotly2 and updateDemoInfo functions to change the bar chart, bubble chart, demographic info, and gauge chart upon selection of id in dropdown menu
 function optionChanged(id) {
   updatePlotly2(id);
   updateDemoInfo(id)
@@ -8,13 +8,16 @@ function optionChanged(id) {
 function init() {
   d3.json("samples.json").then((data) => {
       // Create array to hold all names (all ID names)
-      var names = data.samples.map(x=>x.id)
+      var names = data.names;
       // Append an option in the dropdown for each name in names (each ID name)
+
       names.forEach(function(name) {
           d3.select('#selDataset')
               .append('option')
-              .text(name);
+              .text(name)
+              .property("value", name);
           });
+      
   // Create arrays for sample_values, OTU ids, and OTU labels        
   var sample_values = data.samples.map(x=> x.sample_values);
   var otu_ids = data.samples.map(x=> x.otu_ids);
@@ -52,7 +55,7 @@ function init() {
   // Create trace for bar chart
   var trace1 = {
       x : top_ten[0],
-      y : top_ids[0].map(x => "OTU" + x),
+      y : top_ids[0].map(x => "OTUID " + x),
       text : top_labels[0],
       type : 'bar',
       orientation : 'h',
@@ -70,7 +73,7 @@ function init() {
   // Create bar chart
   var data = [trace1];
   var config = {responsive:true}
-  Plotly.newPlot('bar', data, layout1,config);
+  Plotly.newPlot('bar', data, layout1, config);
 
   //-------------------------------------------------
   // Create a bubble chart that displays each sample.
@@ -88,7 +91,8 @@ function init() {
       mode : 'markers',
       marker : {
           color : otu_ids[0],
-          size : sample_values[0]
+          size : sample_values[0],
+          colorscale: "Portland",
       }
   };
 
@@ -112,7 +116,7 @@ function init() {
 
   // Create the bubble chart
   var data2 = [trace2];
-  Plotly.newPlot('bubble',data2,layout2,config);
+  Plotly.newPlot('bubble',data2, layout2, config);
 
 
   //--------------------------------------------------------
@@ -213,11 +217,6 @@ function init() {
 
   }); //Ends d3.json
 }; // Ends init() function
-
-
-// Call init function so page loads on the first ID selection
-init();
-
 
 // Update the bar chart and bubble chart 
 function updatePlotly2(id) {
@@ -418,3 +417,6 @@ function updateDemoInfo(id) {
 
   });
 };
+
+// Call init function so page loads on the first ID selection
+init();
