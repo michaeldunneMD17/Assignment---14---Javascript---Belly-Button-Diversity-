@@ -2,7 +2,7 @@
 
 Data Analysis to build an interactive dashboard exploring the Belly Button Biodiversity Dataset using Plotly.js
 
-Please view the live file here: file:///C:/Users/micha/OneDrive/Documents/Business%20Analytics%20Boot%20Camp/MONU-VIRT-DATA-PT-01-2022-U-LOL-main/02-Homework/14-Interactive-Web-Visualizations/Instructions/index.html 
+Please view the live file here: https://michaeldunnemd17.github.io/Assignment---14---Javascript---Belly-Button-Diversity-/index.html
 
 ![bacteria](https://user-images.githubusercontent.com/96853408/168268561-eb4ba3ca-d7fe-450f-b10c-7e868b91143a.jpg)
 
